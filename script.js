@@ -1,11 +1,11 @@
-//your JS code here. If required.
 // your JS code here. If required.
 
 // Reference to the output table body
 const output = document.getElementById("output");
 
-// Step 1: show "Loading..." row
+// Step 1: show "Loading..." row with id="loading"
 const loadingRow = document.createElement("tr");
+loadingRow.id = "loading";
 loadingRow.innerHTML = `<td colspan="2">Loading...</td>`;
 output.appendChild(loadingRow);
 
@@ -22,7 +22,7 @@ function createPromise(index) {
 // Step 3: create 3 promises
 const promises = [createPromise(1), createPromise(2), createPromise(3)];
 
-// Start time to measure total elapsed time
+// Start measuring total time
 const start = performance.now();
 
 // Step 4: wait for all to resolve
@@ -30,10 +30,10 @@ Promise.all(promises).then((results) => {
   const end = performance.now();
   const totalTime = ((end - start) / 1000).toFixed(3);
 
-  // remove "Loading..." row
+  // remove loading row
   output.innerHTML = "";
 
-  // populate promise rows
+  // add each promise result
   results.forEach((result) => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -51,4 +51,3 @@ Promise.all(promises).then((results) => {
   `;
   output.appendChild(totalRow);
 });
-
